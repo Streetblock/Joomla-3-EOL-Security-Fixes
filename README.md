@@ -1,6 +1,19 @@
 # Joomla 3 EOL Security Fixes 
 ## Additional changes (unreleased)
 
+The September 2026 review adds or completes the following backports:
+
+- **CVE-2026-35222:** Validate tag ordering options and constrain stored sort directions to `ASC`/`DESC` before SQL construction. Invalid stored directions fall back to `ASC`.
+- **CVE-2026-48901:** Include `stripUSC` in the InputFilter instance cache key so different filtering policies cannot share an instance.
+- **CVE-2026-45133, CVE-2026-45304, CVE-2026-45305:** Adapt Symfony's YAML nesting/collection-alias limits and cleanup regex corrections to the bundled 2.8 parser. Documents exceeding 128 nesting levels or 128 collection-alias references are rejected. The vendor version string is unchanged; this is a backport, not a complete dependency upgrade.
+- **CVE-2024-21725, CVE-2025-63083, CVE-2026-21631, CVE-2026-25901:** Complete escaping in converted email/URL output, previous/next article labels and association comparison attributes.
+- **CVE-2026-21632, CVE-2026-30895, CVE-2026-48950, CVE-2026-48952, CVE-2026-48953:** Disable HTML in truncated readmore titles; escape template paths, installer update metadata and generic image attributes.
+- **CVE-2026-48956, CVE-2026-73371:** Require frontend module-edit permission before dispatch and source-edit permission for batch copies, in addition to destination-create permission. Preserve frontend modal pagination tokens. Copying categories/menu trees may now fail where source/descendant permissions are missing; validate your editorial workflows.
+
+The existing filter also covers the whitespace normalization addressed by **CVE-2025-54476**. Presence of a CVE in the historical release list is not by itself verification of every affected code path.
+
+**Known open dependency finding:** Bundled `sodium_compat` 1.17.1 matches **CVE-2025-69277** (Medium). This package does not include a validated fix for it. Assess native-sodium/fallback use and plan a compatible dependency upgrade; do not interpret these selected backports as complete coverage of bundled libraries or installed extensions.
+
 **CVE-2026-71572:** Remove double quotes from filenames in contact vCard and banner tracking download headers, following Joomla 5.4.8. Download contents and ordinary filenames are preserved.
 
 - [Official advisory](https://developer.joomla.org/security-centre/1068-20260801-core-response-header-injection-in-download-views.html)

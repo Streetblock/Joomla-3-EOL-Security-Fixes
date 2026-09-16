@@ -98,7 +98,7 @@ class InputFilter extends BaseInputFilter
 	 */
 	public static function &getInstance($tagsArray = array(), $attrArray = array(), $tagsMethod = 0, $attrMethod = 0, $xssAuto = 1, $stripUSC = -1)
 	{
-		$sig = md5(serialize(array($tagsArray, $attrArray, $tagsMethod, $attrMethod, $xssAuto)));
+		$sig = md5(serialize(array($tagsArray, $attrArray, $tagsMethod, $attrMethod, $xssAuto, $stripUSC)));
 
 		if (empty(self::$instances[$sig]))
 		{
