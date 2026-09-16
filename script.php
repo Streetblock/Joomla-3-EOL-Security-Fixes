@@ -15,6 +15,7 @@ class joomla3eolsecurityfixesInstallerScript
     private $backup;
     private $lock;
     private $complete = false;
+    private $createdDirectories = array();
 
     public function preflight($type, $parent)
     {
@@ -22,12 +23,16 @@ class joomla3eolsecurityfixesInstallerScript
         $this->plan = array();
         $this->written = array();
         $this->complete = false;
+        $this->createdDirectories = array();
         try {
             if (!in_array($type, array('install', 'update'), true)) {
                 throw new RuntimeException('Only normal installation or update is supported.');
             }
             if (!defined('JVERSION') || !preg_match('/^3\.10\.12(?:[-+].*)?$/D', JVERSION)) {
                 throw new RuntimeException('This package requires Joomla 3.10.12.');
+            }
+            if (version_compare($this->phpVersion(), '7.4.0', '<')) {
+                throw new RuntimeException('This package requires PHP 7.4.0 or later.');
             }
             $source = realpath($parent->getParent()->getPath('source'));
             $root = realpath(JPATH_ROOT);
@@ -39,6 +44,22 @@ class joomla3eolsecurityfixesInstallerScript
                 throw new RuntimeException('Missing or invalid package checksum inventory / manifest version.');
             }
             $this->version = (string) $manifest->version;
+            $additions = isset($inventory['additions']) ? $inventory['additions'] : array();
+            $removals = isset($inventory['removals']) ? $inventory['removals'] : array();
+            $accepted = isset($inventory['accepted_targets']) ? $inventory['accepted_targets'] : array();
+            if (!is_array($additions) || !is_array($removals) || !is_array($accepted)
+                || array_diff($additions, array_keys($inventory['files']))
+                || array_intersect(array_keys($removals), array_keys($inventory['files']))) {
+                throw new RuntimeException('Invalid dependency file plan.');
+            }
+            foreach (array_merge($accepted, $removals) as $hashes) {
+                if (!is_array($hashes) || !$hashes) { throw new RuntimeException('Invalid accepted dependency hashes.'); }
+                foreach ($hashes as $hash) {
+                    if (!is_string($hash) || !preg_match('/^[a-f0-9]{64}$/D', $hash)) {
+                        throw new RuntimeException('Invalid accepted dependency hash.');
+                    }
+                }
+            }
             $actual = array();
             $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source . '/files', FilesystemIterator::SKIP_DOTS));
             foreach ($iterator as $entry) {
@@ -52,14 +73,29 @@ class joomla3eolsecurityfixesInstallerScript
             usort($expected, array($this, 'markerLast'));
             foreach ($expected as $relative) {
                 $src = $this->checkedPath($source . '/files', $relative);
-                $dest = $this->checkedPath($root, $relative);
+                $addition = in_array($relative, $additions, true);
+                $dest = $this->checkedPath($root, $relative, $addition);
                 $hash = $inventory['files'][$relative];
                 if (!is_string($hash) || !preg_match('/^[a-f0-9]{64}$/D', $hash) || $this->hash($src) !== $hash) {
                     throw new RuntimeException('Package checksum mismatch: ' . $relative);
                 }
-                if (!is_writable($dest)) { throw new RuntimeException('Target is not writable: ' . $relative); }
-                $this->plan[$relative] = array('source' => $src, 'target' => $dest, 'new' => $hash, 'old' => $this->hash($dest));
+                $old = is_file($dest) ? $this->hash($dest) : null;
+                if ($old !== null && !is_writable($dest)) { throw new RuntimeException('Target is not writable: ' . $relative); }
+                if ($old !== null && (($addition && $old !== $hash)
+                    || (isset($accepted[$relative]) && $old !== $hash && !in_array($old, $accepted[$relative], true)))) {
+                    throw new RuntimeException('Unrecognized dependency/autoloader file; review local changes first: ' . $relative);
+                }
+                $this->plan[$relative] = array('source' => $src, 'target' => $dest, 'new' => $hash, 'old' => $old);
             }
+            foreach ($removals as $relative => $hashes) {
+                $dest = $this->checkedPath($root, $relative, true);
+                $old = is_file($dest) ? $this->hash($dest) : null;
+                if (!is_array($hashes) || !$hashes || ($old !== null && (!in_array($old, $hashes, true) || !is_writable(dirname($dest))))) {
+                    throw new RuntimeException('Unrecognized obsolete dependency file: ' . $relative);
+                }
+                $this->plan[$relative] = array('source' => null, 'target' => $dest, 'new' => null, 'old' => $old);
+            }
+            uksort($this->plan, array($this, 'markerLast'));
             return true;
         } catch (Exception $e) {
             $this->plan = array();
@@ -85,9 +121,24 @@ class joomla3eolsecurityfixesInstallerScript
             if (!$this->plan || $this->complete) { throw new RuntimeException('No validated installation plan.'); }
             $this->prepareBackup();
             foreach ($this->plan as $relative => $item) {
-                $this->checkedPath(realpath(JPATH_ROOT), $relative);
-                if ($this->hash($item['source']) !== $item['new'] || $this->hash($item['target']) !== $item['old']) {
+                $this->assertOriginalTarget($relative, $item);
+                if ($item['new'] === null) {
+                    if ($item['old'] !== null) {
+                        $this->written[] = $relative;
+                        if (!$this->removeFile($item['target'])) { throw new RuntimeException('Cannot remove obsolete file: ' . $relative); }
+                        $this->invalidate($item['target']);
+                    }
+                    continue;
+                }
+                if ($this->hash($item['source']) !== $item['new']) {
                     throw new RuntimeException('File changed during installation: ' . $relative);
+                }
+                if ($item['old'] === null) {
+                    $this->createParents(dirname($item['target']));
+                    $this->checkedPath(realpath(JPATH_ROOT), $relative, true);
+                    $handle = @fopen($item['target'], 'x');
+                    if (!$handle) { throw new RuntimeException('New file appeared during installation: ' . $relative); }
+                    fclose($handle);
                 }
                 $this->written[] = $relative; // A failed copy may already have truncated the destination.
                 if (!$this->copyFile($item['source'], $item['target']) || $this->hash($item['target']) !== $item['new']) {
@@ -118,7 +169,8 @@ class joomla3eolsecurityfixesInstallerScript
         $this->backup = $base . '/' . gmdate('Ymd-His') . '-' . uniqid('', true);
         if (!mkdir($this->backup, 0700)) { throw new RuntimeException('Cannot create backup directory.'); }
         foreach ($this->plan as $relative => $item) {
-            $this->checkedPath($root, $relative);
+            $this->assertOriginalTarget($relative, $item);
+            if ($item['old'] === null) { continue; }
             $target = $this->backupFile($relative);
             if (!$this->copyFile($item['target'], $target) || $this->hash($target) !== $item['old']) {
                 throw new RuntimeException('Backup failed verification: ' . $relative);
@@ -132,8 +184,10 @@ class joomla3eolsecurityfixesInstallerScript
     private function verifyInstalled()
     {
         foreach ($this->plan as $relative => $item) {
-            $this->checkedPath(realpath(JPATH_ROOT), $relative);
-            if ($this->hash($item['target']) !== $item['new']) { throw new RuntimeException('Installed checksum mismatch: ' . $relative); }
+            $this->checkedPath(realpath(JPATH_ROOT), $relative, $item['new'] === null);
+            if ($item['new'] === null ? file_exists($item['target']) : $this->hash($item['target']) !== $item['new']) {
+                throw new RuntimeException('Installed file state mismatch: ' . $relative);
+            }
         }
     }
 
@@ -143,13 +197,26 @@ class joomla3eolsecurityfixesInstallerScript
         foreach (array_reverse($this->written) as $relative) {
             $item = $this->plan[$relative];
             try {
-                $this->checkedPath(realpath(JPATH_ROOT), $relative);
+                $this->checkedPath(realpath(JPATH_ROOT), $relative, true);
+                if ($item['old'] === null) {
+                    if (file_exists($item['target']) && !$this->removeFile($item['target'])) { throw new RuntimeException('Cannot remove added file'); }
+                    clearstatcache(true, $item['target']);
+                    if (file_exists($item['target'])) { throw new RuntimeException('Added file remains'); }
+                    $this->invalidate($item['target']);
+                    continue;
+                }
                 $backup = $this->backupFile($relative);
                 if ($this->hash($backup) !== $item['old'] || !$this->copyFile($backup, $item['target'])
                     || $this->hash($item['target']) !== $item['old']) { throw new RuntimeException('Restore failed'); }
                 $this->invalidate($item['target']);
             } catch (Exception $e) { $restored = false; }
             catch (Throwable $e) { $restored = false; }
+        }
+        foreach (array_reverse($this->createdDirectories) as $directory) {
+            // Never recursively delete: remove only empty directories created by this run.
+            if (is_dir($directory) && !is_link($directory) && count(scandir($directory)) === 2) {
+                if (!@rmdir($directory)) { $restored = false; }
+            }
         }
         $this->complete = false;
         if ($this->backup && is_dir($this->backup)) {
@@ -177,27 +244,57 @@ class joomla3eolsecurityfixesInstallerScript
         }
         $this->unlock();
         $this->message('Security Fixes ' . $this->version . ': ' . count($this->plan)
-            . ' replacement files verified. Backup: ' . $this->backup
+            . ' managed file states verified (replacements, additions and removals). Backup: ' . $this->backup
             . '. This verifies package installation, not the security of the entire site.', 'message');
         return true;
     }
 
-    private function checkedPath($base, $relative)
+    private function checkedPath($base, $relative, $allowMissing = false)
     {
         if (!is_string($relative) || !preg_match('#^[a-zA-Z0-9_./-]+$#D', $relative)
             || preg_match('#(^|/)\.\.?(/|$)#', $relative) || substr($relative, 0, 1) === '/') {
             throw new RuntimeException('Unsafe relative path.');
         }
         $path = $base;
+        $missing = false;
         foreach (explode('/', $relative) as $segment) {
+            if ($allowMissing && !file_exists($path . '/' . $segment) && !$missing) {
+                if (!is_dir($path) || !is_writable($path)) { throw new RuntimeException('New file parent is not writable: ' . $relative); }
+                $missing = true;
+            }
             $path .= '/' . $segment;
             if (is_link($path)) { throw new RuntimeException('Symlinks are not supported: ' . $relative); }
         }
+        if ($missing && $allowMissing) { return $path; }
         $resolved = realpath($path);
         if (!$resolved || !$this->inside($resolved, $base) || !is_file($resolved) || !is_readable($resolved)) {
             throw new RuntimeException('Missing, unreadable or unsafe file: ' . $relative);
         }
         return $resolved;
+    }
+
+    private function assertOriginalTarget($relative, $item)
+    {
+        clearstatcache(true, $item['target']);
+        $this->checkedPath(realpath(JPATH_ROOT), $relative, $item['old'] === null);
+        if ($item['old'] === null ? file_exists($item['target']) : $this->hash($item['target']) !== $item['old']) {
+            throw new RuntimeException('File changed during installation: ' . $relative);
+        }
+    }
+
+    private function createParents($directory)
+    {
+        $missing = array();
+        $root = realpath(JPATH_ROOT);
+        while (!is_dir($directory)) {
+            if (!$this->inside($directory, $root) || is_link($directory)) { throw new RuntimeException('Unsafe new directory'); }
+            $missing[] = $directory;
+            $directory = dirname($directory);
+        }
+        foreach (array_reverse($missing) as $directory) {
+            if (!@mkdir($directory, 0755)) { throw new RuntimeException('Cannot create dependency directory'); }
+            $this->createdDirectories[] = $directory;
+        }
     }
 
     private function inside($path, $base)
@@ -216,13 +313,16 @@ class joomla3eolsecurityfixesInstallerScript
     }
 
     protected function copyFile($source, $target) { return @copy($source, $target); }
+    protected function removeFile($path) { return @unlink($path); }
+    protected function phpVersion() { return PHP_VERSION; }
     private function backupFile($relative) { return $this->backup . '/' . hash('sha256', $relative) . '.bak'; }
 
     private function record($status)
     {
         $files = array();
         foreach ($this->plan as $relative => $item) {
-            $files[$relative] = array('backup' => basename($this->backupFile($relative)), 'before' => $item['old'], 'after' => $item['new']);
+            $files[$relative] = array('backup' => $item['old'] === null ? null : basename($this->backupFile($relative)),
+                'before' => $item['old'], 'after' => $item['new']);
         }
         $json = json_encode(array('version' => $this->version, 'root' => realpath(JPATH_ROOT),
             'status' => $status, 'utc' => gmdate('c'), 'files' => $files));

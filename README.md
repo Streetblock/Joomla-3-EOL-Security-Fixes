@@ -1,18 +1,24 @@
 # Joomla 3 EOL Security Fixes 
 ## Additional changes (unreleased)
 
+This package requires **Joomla 3.10.12 and PHP 7.4 or later**. PHP 7.4.33 on 64-bit Windows is the tested compatibility target; verify the actual web-server PHP runtime on staging.
+
+Complete official dependency releases replace the earlier custom YAML backport: **Symfony YAML 5.4.53**, **sodium_compat 1.24.2** and the required **Symfony deprecation-contracts 2.5.4**. Composer metadata and autoload files are updated together. Source revisions and file hashes are recorded in `DEPENDENCIES.json`; library source is unmodified.
+
 The September 2026 review adds or completes the following backports:
 
 - **CVE-2026-35222:** Validate tag ordering options and constrain stored sort directions to `ASC`/`DESC` before SQL construction. Invalid stored directions fall back to `ASC`.
 - **CVE-2026-48901:** Include `stripUSC` in the InputFilter instance cache key so different filtering policies cannot share an instance.
-- **CVE-2026-45133, CVE-2026-45304, CVE-2026-45305:** Adapt Symfony's YAML nesting/collection-alias limits and cleanup regex corrections to the bundled 2.8 parser. Documents exceeding 128 nesting levels or 128 collection-alias references are rejected. The vendor version string is unchanged; this is a backport, not a complete dependency upgrade.
+- **CVE-2026-45133, CVE-2026-45304, CVE-2026-45305:** Update Symfony YAML from 2.8.52 to the complete official 5.4.53 release, including its nesting/collection-alias limits and cleanup corrections. Documents exceeding 128 nesting levels or 128 collection-alias references are rejected. Joomla Registry's YAML reader/writer is tested; extensions calling old YAML APIs directly need staging checks, since this is a major-version upgrade.
 - **CVE-2024-21725, CVE-2025-63083, CVE-2026-21631, CVE-2026-25901:** Complete escaping in converted email/URL output, previous/next article labels and association comparison attributes.
 - **CVE-2026-21632, CVE-2026-30895, CVE-2026-48950, CVE-2026-48952, CVE-2026-48953:** Disable HTML in truncated readmore titles; escape template paths, installer update metadata and generic image attributes.
 - **CVE-2026-48956, CVE-2026-73371:** Require frontend module-edit permission before dispatch and source-edit permission for batch copies, in addition to destination-create permission. Preserve frontend modal pagination tokens. Copying categories/menu trees may now fail where source/descendant permissions are missing; validate your editorial workflows.
 
 The existing filter also covers the whitespace normalization addressed by **CVE-2025-54476**. Presence of a CVE in the historical release list is not by itself verification of every affected code path.
 
-**Known open dependency finding:** Bundled `sodium_compat` 1.17.1 matches **CVE-2025-69277** (Medium). This package does not include a validated fix for it. Assess native-sodium/fallback use and plan a compatible dependency upgrade; do not interpret these selected backports as complete coverage of bundled libraries or installed extensions.
+**CVE-2025-69277:** Update `sodium_compat` from 1.17.1 to the complete official 1.24.2 release. This supersedes the previously open Medium package finding. The PHP fallback and native sodium dispatch are tested on PHP 7.4.33 x64; an actual 32-bit runtime has not been tested. Updating the PHP library does not update the server's native libsodium extension.
+
+Prefer complete compatible dependency releases over local vendor patches. The existing Joomla Filter backports remain an exception: the reviewed PHP-7-compatible releases do not contain all the filtering corrections retained here; the newer 3.x line requires PHP 8.1. Its old Composer version may still trigger a scanner warning. Do not replace it with an older, less complete filter just to change the version string.
 
 **CVE-2026-71572:** Remove double quotes from filenames in contact vCard and banner tracking download headers, following Joomla 5.4.8. Download contents and ordinary filenames are preserved.
 
@@ -23,7 +29,7 @@ The existing filter also covers the whitespace normalization addressed by **CVE-
 
 - [Official SHTML upload advisory](https://developer.joomla.org/security-centre/1077-20260810-core-unrestricted-uploads-of-shtml-files.html)
 
-**Installer:** Validate Joomla 3.10.12, the complete package inventory, SHA-256 checksums and every target before replacement. Back up and verify the current files before writing; verify replacements and attempt rollback on failure. Report file verification rather than claiming the entire site is secure. Keep the extension record instead of automatically uninstalling it.
+**Installer:** Validate Joomla 3.10.12, PHP >= 7.4, the complete package inventory, SHA-256 checksums and every managed target. Back up and verify existing files; support explicitly listed additions and obsolete-file removals, verify the resulting state and attempt rollback on failure. Unknown local changes to updated dependencies or Composer autoload files cause an abort. Report file verification rather than claiming the entire site is secure. Keep the extension record instead of automatically uninstalling it.
 
 These are selected backports, not a complete Joomla security update or coverage of every August advisory. Existing language-parser compatibility limitations also apply. The previous release history below is retained for reference.
 
@@ -31,10 +37,10 @@ These are selected backports, not a complete Joomla security update or coverage 
 
 1. Take a full site and database backup. Test on a protected copy with the production PHP version. Review local modifications to the files being replaced: existing custom changes are backed up but will be overwritten.
 2. Create a private directory writable by PHP **outside all publicly served directories**, including virtual-host aliases. The default is `joomla3-eol-backups` beside the Joomla root. Alternatively, add `public $eol_security_backup_path = '/absolute/private/backup/path';` inside the `JConfig` class in `configuration.php`. The installer rejects a backup path inside Joomla; it cannot detect every web-server alias. Restrict directory permissions to the PHP account (0700 on Unix; equivalent Windows ACLs).
-3. Put the site in maintenance mode and prevent concurrent requests/updates during replacement. This multi-file update is not atomic. Install the package containing `checksums.json`; missing source or target files cause an abort. Symlinked replacement paths are unsupported. Direct PHP filesystem access is required; Joomla's FTP layer is not used.
-4. Require the explicit message that all replacement files were verified. Keep the reported backup directory and its `restore.json`, which maps each relative path to its backup filename and before/after checksums. A Joomla version marker alone is not proof. Then test site functions before reopening.
+3. Put the site in maintenance mode and prevent concurrent requests/updates during replacement. This multi-file update is not atomic. Install the package containing `checksums.json`; missing source or required replacement targets cause an abort. Only explicitly listed dependency additions may be absent. Symlinked paths are unsupported. Direct PHP filesystem access is required; Joomla's FTP layer is not used. Customized Composer installations require a separate reviewed integration; do not bypass a rejected hash check.
+4. Require the explicit message that all managed file states were verified. Keep the reported backup directory and its `restore.json`, which maps each relative path to its backup filename and before/after checksums. `before: null` means a newly added file: remove it during manual recovery. `after: null` means an obsolete file was removed: restore its backup during recovery. A Joomla version marker alone is not proof. Then test site functions before reopening.
 
-On a copy or verification failure, the installer restores attempted replacements and verifies their original hashes. If restoration fails, it reports **RESTORE FAILED**; keep the site offline and restore the affected files from the retained backup (or your full site backup). A process crash, disk failure or later Joomla metadata failure may require manual recovery. Removing the retained extension entry does **not** undo the patches. These backups cover replacement files only, not the database or the rest of the site.
+On a copy or verification failure, the installer restores replaced/removed files, removes newly added files and verifies their original state. If restoration fails, it reports **RESTORE FAILED**; keep the site offline and restore the affected files from the retained backup (or your full site backup). A process crash, disk failure or later Joomla metadata failure may require manual recovery. Removing the retained extension entry does **not** undo the patches. These backups cover managed files only, not the database or the rest of the site.
 
 The checksum inventory detects incomplete or changed package files; it is not a publisher signature and does not check whether the existing site is compromised. Keep the inventory synchronized when preparing a package. Runtime installation does not require the fork's test or documentation directories.
 

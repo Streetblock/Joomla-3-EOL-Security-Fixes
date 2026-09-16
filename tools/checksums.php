@@ -11,7 +11,16 @@ foreach ($iterator as $entry) {
 }
 ksort($files);
 $manifest = simplexml_load_file($root . '/joomla3eolsecurityfixes.xml');
-$json = json_encode(array('version' => (string) $manifest->version, 'files' => $files), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n";
+$inventory = array('version' => (string) $manifest->version, 'files' => $files);
+$dependencies = json_decode(file_get_contents($root . '/DEPENDENCIES.json'), true);
+foreach (array('additions', 'removals', 'accepted_targets') as $key) {
+    if (!isset($dependencies[$key]) || !is_array($dependencies[$key])) { throw new RuntimeException('Invalid dependency inventory'); }
+    $inventory[$key] = $dependencies[$key];
+}
+foreach ($dependencies['upstream_files'] as $path => $digest) {
+    if (!isset($files[$path]) || $files[$path] !== $digest) { throw new RuntimeException('Official dependency file changed: ' . $path); }
+}
+$json = json_encode($inventory, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n";
 if (in_array('--check', $argv, true)) {
     if (@file_get_contents($root . '/checksums.json') !== $json) { fwrite(STDERR, "Package checksums are stale. Run php tools/checksums.php.\n"); exit(1); }
     echo count($files) . " package checksums verified\n";

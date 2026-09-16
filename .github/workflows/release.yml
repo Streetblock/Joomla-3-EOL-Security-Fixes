@@ -83,6 +83,7 @@ jobs:
             joomla3eolsecurityfixes.xml \
             script.php \
             checksums.json \
+            DEPENDENCIES.json \
             README.md \
             LICENSE \
             -x '*.DS_Store'

@@ -1,4 +1,10 @@
 * text=auto eol=lf
+# Preserve exact bytes of official dependency releases and generated Composer files.
+files/libraries/vendor/symfony/yaml/** -text
+files/libraries/vendor/symfony/deprecation-contracts/** -text
+files/libraries/vendor/paragonie/sodium_compat/** -text
+files/libraries/vendor/composer/** -text
+files/libraries/vendor/autoload.php -text
 updates.xml export-ignore
 .gitignore export-ignore
 .gitattributes export-ignore

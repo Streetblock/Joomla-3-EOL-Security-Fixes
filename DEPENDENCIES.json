@@ -1,0 +1,617 @@
+{
+  "php_minimum": "7.4.0",
+  "composer": "2.10.3",
+  "packages": [
+    {
+      "name": "paragonie/sodium_compat",
+      "version": "v1.24.2",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/paragonie/sodium_compat.git",
+        "reference": "4524c98a826776c9a32d6ce06932563cb10f3995"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/paragonie/sodium_compat/zipball/4524c98a826776c9a32d6ce06932563cb10f3995",
+        "reference": "4524c98a826776c9a32d6ce06932563cb10f3995",
+        "shasum": ""
+      },
+      "require": {
+        "paragonie/random_compat": ">=1",
+        "php": "^5.2.4|^5.3|^5.4|^5.5|^5.6|^7|^8"
+      }
+    },
+    {
+      "name": "symfony/yaml",
+      "version": "v5.4.53",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/symfony/yaml.git",
+        "reference": "ae0bbb46f77ff56591d0a0259c7f458f4b3e1f77"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/symfony/yaml/zipball/ae0bbb46f77ff56591d0a0259c7f458f4b3e1f77",
+        "reference": "ae0bbb46f77ff56591d0a0259c7f458f4b3e1f77",
+        "shasum": ""
+      },
+      "require": {
+        "php": ">=7.2.5",
+        "symfony/deprecation-contracts": "^2.1|^3",
+        "symfony/polyfill-ctype": "^1.8"
+      }
+    },
+    {
+      "name": "symfony/deprecation-contracts",
+      "version": "v2.5.4",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/symfony/deprecation-contracts.git",
+        "reference": "605389f2a7e5625f273b53960dc46aeaf9c62918"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/605389f2a7e5625f273b53960dc46aeaf9c62918",
+        "reference": "605389f2a7e5625f273b53960dc46aeaf9c62918",
+        "shasum": ""
+      },
+      "require": {
+        "php": ">=7.1"
+      }
+    }
+  ],
+  "additions": [
+    "libraries/vendor/paragonie/sodium_compat/composer-php52.json",
+    "libraries/vendor/paragonie/sodium_compat/composer.json",
+    "libraries/vendor/paragonie/sodium_compat/lib/php84compat.php",
+    "libraries/vendor/paragonie/sodium_compat/lib/php84compat_const.php",
+    "libraries/vendor/paragonie/sodium_compat/README.md",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/AEGIS/State128L.php",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/AEGIS/State256.php",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/AEGIS128L.php",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/AEGIS256.php",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/AES/Block.php",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/AES/Expanded.php",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/AES/KeySchedule.php",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/AES.php",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Curve25519/README.md",
+    "libraries/vendor/symfony/deprecation-contracts/CHANGELOG.md",
+    "libraries/vendor/symfony/deprecation-contracts/composer.json",
+    "libraries/vendor/symfony/deprecation-contracts/function.php",
+    "libraries/vendor/symfony/deprecation-contracts/LICENSE",
+    "libraries/vendor/symfony/deprecation-contracts/README.md",
+    "libraries/vendor/symfony/yaml/CHANGELOG.md",
+    "libraries/vendor/symfony/yaml/Command/LintCommand.php",
+    "libraries/vendor/symfony/yaml/composer.json",
+    "libraries/vendor/symfony/yaml/ParserState.php",
+    "libraries/vendor/symfony/yaml/README.md",
+    "libraries/vendor/symfony/yaml/Resources/bin/yaml-lint",
+    "libraries/vendor/symfony/yaml/Tag/TaggedValue.php"
+  ],
+  "removals": {
+    "libraries/vendor/paragonie/sodium_compat/autoload-fast.php": [
+      "0dd3bf174805a616df65418159e3abbce238be9ad85d29e6169d97dd1019fc88"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/autoload-pedantic.php": [
+      "02be34aed9fd8b3da34c4f7a2d0f59b0f55d1c848f806e02d8afee0904880dee"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/autoload-phpunit.php": [
+      "f1d15bf11709673e963049c0f86a4fc796e6d93c88eba8da66174c4968dcc17c"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Base64/Common.php": [
+      "e130c823eabe04a9dee5b6059ac0b04555c9ad53cdf9424a713c2b6780b23e36"
+    ]
+  },
+  "accepted_targets": {
+    "libraries/vendor/autoload.php": [
+      "7d485508daf6c2f93f6c6ef31e040738e5662fee8cbcd19c0781ed050280a4c4"
+    ],
+    "libraries/vendor/composer/autoload_classmap.php": [
+      "dcf2fa61213af4227bf86ff9258f91fcff29f300ce372805f6d034d60ad2e9aa"
+    ],
+    "libraries/vendor/composer/autoload_files.php": [
+      "c76b0144da925529636ee1cd9c67883b441f05722ce9de03202b5ec550eca1f6"
+    ],
+    "libraries/vendor/composer/autoload_namespaces.php": [
+      "ef448c46154a2845ad34a840970b68fba4213a8bcb3a78cdf5b4d6a7e3f46224"
+    ],
+    "libraries/vendor/composer/autoload_psr4.php": [
+      "9ab1258bfa8310033f21c2a1628cb54e9b7c6eff38cfba95d825e9e7c744a123"
+    ],
+    "libraries/vendor/composer/autoload_real.php": [
+      "6be9355741f1700851b855a04b2e31bfa35f3aa9bfe5b9cc7e8a95cd37e40186"
+    ],
+    "libraries/vendor/composer/autoload_static.php": [
+      "6d385663c9b89c0c4084e62ad6f81bd5455fd8702319c71d5980ad5b82207520"
+    ],
+    "libraries/vendor/composer/ClassLoader.php": [
+      "c944c4b1228ef6bef01b0029205c562c96536f8e550052d753b57723d520e69a"
+    ],
+    "libraries/vendor/composer/installed.json": [
+      "1979ac5caba88ad9d45e3d5a5d5752cd74c017f3456d0d2d5098ddfa1e2bfcdf"
+    ],
+    "libraries/vendor/composer/installed.php": [
+      "b995d7d4726bdc3f043121d04484926bad355d19394f480591b606d0adce0ea7"
+    ],
+    "libraries/vendor/composer/InstalledVersions.php": [
+      "c13545b80c74150db8ef2e6e6ae614ca5bab5d02eb0a2e90e20123177fdc330b"
+    ],
+    "libraries/vendor/composer/LICENSE": [
+      "c8cce4b6b9729f264ffdf9296d505d63432497feeed1f586d1902b942197e024"
+    ],
+    "libraries/vendor/composer/platform_check.php": [
+      "ba343237963885137a5740734edf9b3e457a3466c1e4c4cdade5940b81910413"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/autoload-php7.php": [
+      "1578b1c6f97fe3bd1417e6b493c4f55b1666659b1e6dafa3b22d7730f90f1144"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/autoload.php": [
+      "e79e26528709b95c287d6e00af81ad5c85725d476b100c5a7a2efa743d96e01a"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/lib/constants.php": [
+      "e211d55b064f9f8c6994e16efc6d3308ef943ebf1845c8d224e694f2660c10c3"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/lib/namespaced.php": [
+      "476eb188ce7b66400c21748efb5accfc282ea02474a793042594452ee582392a"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/lib/php72compat.php": [
+      "3da2afb3d9de96c1406d35ccb4b8359ae67dbb7c51e08710d94c27caff1229a0"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/lib/php72compat_const.php": [
+      "040aaf18aa07506264d40a64e83e8dc8e60a0c704bc5685f9301ec00fc527f07"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/lib/ristretto255.php": [
+      "b66ee195c822a2b8228078c888779b341b57e29b2c84980ba6fed59542c14920"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/lib/sodium_compat.php": [
+      "a0c68b8a18597b95c04cbd67d329fe34bee14b20b4a4022603a2cdfdfac2d857"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/lib/stream-xchacha20.php": [
+      "6833745243110af106c52367ce85c5d5fd7bae515959353b9f4d0f27953a88ca"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/LICENSE": [
+      "9e3c846fa64f4cb460a7f5a05bdb178925619489e94483f2fd209898e71b8f92"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Compat.php": [
+      "ae59dfb04b30ad6a6999d29826c86250393010df28c2f0e11b824280a6a579d4"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/BLAKE2b.php": [
+      "ffd683c48ec5fdd38911303ae4f151d423c12bed750730514f698719f35bce18"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/ChaCha20/Ctx.php": [
+      "61609cbbd05134d59342ff9ae3e77cf627be9dac73bde356f36ec1059afb4d3a"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/ChaCha20/IetfCtx.php": [
+      "0574987a882e6b4e6b39ff0082f4e7a93f2db6b8fe0d39f2374c31f8a4dee867"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/ChaCha20.php": [
+      "2482e70fd87c7bd235a340d2df60d88e806eb936b639044eb8732f2ccb3718f2"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/Curve25519/Fe.php": [
+      "0c1bdcd6743d95c7ee0d1a16fb3956d30f974e95ab366144ecad2713d0dc668a"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/Curve25519/Ge/Cached.php": [
+      "cc8aa08af8ef7e8589f8cd845cdaf34f476dffce15e9aedfa9442a07014a8e66"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/Curve25519/Ge/P1p1.php": [
+      "28080eba6fa5689e36b6e2729e516487c5a796d22697b5bddab7a1832dd9671f"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/Curve25519/Ge/P2.php": [
+      "bc5f9ffb87c43a7f260c90165ec7b1b4d4ef0a76aab1c033d635804577f37930"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/Curve25519/Ge/P3.php": [
+      "bd61dcbf8084251ec6ced2b96e81a36782882d960fd853fffd701c075b020d01"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/Curve25519/Ge/Precomp.php": [
+      "229c34972af661a6c2fffb9f46b048c4f2f871bd147433495d07afe15bc43a14"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/Curve25519/H.php": [
+      "9f945f6b32f34b23282cb15654dbe5fd6c9b088d1c11aae62a932b45d01e2404"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/Curve25519.php": [
+      "81e544f88b402e6d040741acae42e7846c24c971bf2420479e0e5be16c907bf8"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/Ed25519.php": [
+      "2b40b5cc980b2c61cf11b3805b2e504ef285bcece051f31b5383ea3056a7569c"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/HChaCha20.php": [
+      "ff0f44d534ca1a085ca503a5bc02f0fd5c8cce9ad0cdbd5ab69530497fc92f1d"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/HSalsa20.php": [
+      "202dbf136f07f5fd1fb490d09cd310e621d016a75118494ca9bd35abd63a8190"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/Poly1305/State.php": [
+      "cf3e7db368bd91f2b13823d393b2019c83eaddc8934cfcb83e85761740ab1699"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/Poly1305.php": [
+      "db9e59e0d0ffff7e21f9d7a416de664bac98d0818653dc380af2422421198582"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/Salsa20.php": [
+      "645f40cd76a9e39d9baa209314f15d9c05828b5c6170450c3e568a811f68c73d"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/SipHash.php": [
+      "8ea1b29d750e901b8a774b716b354a8a6b8ae7b023c1ca5a009a0b67737cdaa3"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/Util.php": [
+      "d17abbe67dbb87e9114f15365f5830de52f5eeea8f44f1265b32cd8c9ca78611"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/X25519.php": [
+      "7df850a3b047b4d5a691df65e7398db6f8e5c029c0fe7195014cf6103d733c9f"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/XChaCha20.php": [
+      "e98d67678cbd7c21d3a0b3a25b08da1ecdc83a67e607d00a9efb21fa462f48d6"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/Xsalsa20.php": [
+      "87423b4f144440ef7b73bdac40bb7c844e2266df1b1aabcc3fec165b2780c5f6"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Crypto.php": [
+      "fd56b4cab6806a9c819332813af5b50f7be14143424d5f2243fadfa65fb66f47"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/namespaced/File.php": [
+      "7890c0a02a8667f6b1532da1a38623faf2af4c6cd5a00a1d54471b43934a3f81"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Compat.php": [
+      "f66c54ccb1d43c0655b4bd1c29306c874f584c5c35664c21477e6b84d09e3b55"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Base64/Original.php": [
+      "319aa44acb5de9fd5acc9798053e029cd923657837d9d0950aee8f09ce713a11"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Base64/UrlSafe.php": [
+      "f836967bdf476fcc960cae9d5a609d892a1b2cfefaf3141239a61a61f97c3fba"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core/BLAKE2b.php": [
+      "0b4411492b6e615e48cd280636d7bff795d5dcece452384b5529ac77c79e7f28"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core/ChaCha20/Ctx.php": [
+      "c81359c633a26d69f15a6eeb16fdad844e5068e7d8d622e702401efd8f7180c7"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core/ChaCha20/IetfCtx.php": [
+      "2242ff87441523ba2915089b3a6e4c8b7dc271f2dd9b980bd9df62a44c206117"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core/ChaCha20.php": [
+      "88369f649ab16102ec9b7ce40c04c99347d9d77650c3b58e7b1e3955d277a4cf"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Curve25519/Fe.php": [
+      "917900ef95ec9052a591d82da596c28bb397b8e0d2010ce945ea980b7d1d6055"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Curve25519/Ge/Cached.php": [
+      "47ed26428a34bef32986b2866e93025bd216ccb5a3b03d7de20a73d03527d275"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Curve25519/Ge/P1p1.php": [
+      "f020c30d688cf7029c3f95753c192a6ed7709721bc1c3d5d699c26cec3e94091"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Curve25519/Ge/P2.php": [
+      "d9cbae2f47ce93d9499f2947d431c45dc09ef9b05eb0f0bf8ed711b9ca1c7959"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Curve25519/Ge/P3.php": [
+      "766e13a110be32172a1ff88f3d7c8ae4e2e516e90b81d9be5ac91f209c7c4eba"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Curve25519/Ge/Precomp.php": [
+      "0170e155d2a8f56daf92cbcb9f03ac05d572f18b42ea87c2802d548aa484d3f4"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Curve25519/H.php": [
+      "5bdca3663d50486dd4d1101cf90b10f5ef9fbb7ccbf6fca8c29487941ba348ae"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Curve25519.php": [
+      "0a262f2837aa4a8279775f0aa9f0e77a1df5cdff0e01cb1e5e935517b02dd009"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Ed25519.php": [
+      "65f7d6f3db1b3e23f6300a7f232432f8637903e2bffb600c1ea7495543f01d29"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core/HChaCha20.php": [
+      "d7abbed639fa45d61bb46678ed7546737e11878e84191080a58b7e30fdb86273"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core/HSalsa20.php": [
+      "15f474f45cea3fece4eac6177580835539cf63849316b37e1e99e4edd14bbca9"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Poly1305/State.php": [
+      "a4729d2270042668ad940cfa6b06b3e1f9ef193840df2186219b14ddd30fb344"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Poly1305.php": [
+      "8c5b83b626454c36f53a39a0d839ce1e796614df60c87679acade3e152cc8989"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Ristretto255.php": [
+      "22ec93547310b8c3b3dc63eb5caad9c29bd6e4539b5bb18138e387909016912e"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Salsa20.php": [
+      "ecff9a937af88fe087ff432b3dee096213890cf5377a2734edeec880547f360d"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core/SecretStream/State.php": [
+      "7f5cdc92ae4330588efaff8a28d3251eac9b48aeab70e448604d180471f195b8"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core/SipHash.php": [
+      "e1297c4ff528824e08d6082a91ccb356261153005f4d18e68c71b54a30c4e65a"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Util.php": [
+      "cdd378a0053c1c52839144244203b93eff0e1716347664a6a23f85ee607f46fb"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core/X25519.php": [
+      "2a0942f4f0453116035ed8c7a1f3e7da7324621d80d93c60eba30d187a0ea8de"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core/XChaCha20.php": [
+      "58c2df4d57a582205b60a4670768d51c9412af1c493e1b31e94304b0e594838f"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core/XSalsa20.php": [
+      "80151b03429b8d17ea792b4da7de33d1ee60b97b0a82bdaaa2fb98699a368322"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/BLAKE2b.php": [
+      "520be088a2028f7633804179ad1843d4386a969acc754ee01b09c3e8b9b85b41"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/ChaCha20/Ctx.php": [
+      "9ebee6da219dcd57458002b18b403db77ee105ba1c1f05ab11e69009ed655741"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/ChaCha20/IetfCtx.php": [
+      "3d9cc2c6e0af0415b5d19c825eb7d62caa1299ee31ab68715982976b53c9d853"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/ChaCha20.php": [
+      "d7e29584cc431eb49919fd01cfc8264f90bebef7076e4bb2b4b133c630111c72"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Curve25519/Fe.php": [
+      "f4e6c38e08d6ece5ee49dfe197bf03be0dbc2e357f4d26413d14c85fcb479a4e"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Curve25519/Ge/Cached.php": [
+      "1f35e8d649cb0527d40fd3c0e05623f4535a62e60c0dbb7b23b35fd4c223f80d"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Curve25519/Ge/P1p1.php": [
+      "a73351127182d1548afa20c027288c8b23f4387b16b608efd6cf5b48b16ad800"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Curve25519/Ge/P2.php": [
+      "c20e998d89be90f328b1931916fd676d2191b7a2a414367863a32a4d25d95afc"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Curve25519/Ge/P3.php": [
+      "3435380807c5c1fdfd3e0a03f054119853fe9e82a18662c48fcfbae696b7125a"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Curve25519/Ge/Precomp.php": [
+      "c8c09e1e6af63f3548a6e6ba5e792c466c4f85ac6a1e5338ee4ceae4f2c94e6a"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Curve25519/H.php": [
+      "7809943ce7c07996f2da77548d9fcafaaf41cc1c32d7f448bdb0786577a4374e"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Curve25519/README.md": [
+      "2d8c95220c42f648c8bf10146f77997f4a23cf619ab4e5e0e76713f8cc79f7f6"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Curve25519.php": [
+      "6f09b3a87b06c92e82dd276fb10ea1062edcd3c4c9eb5de8b156539b6510bcc3"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Ed25519.php": [
+      "aa3872475f865af6ba5c3d465a712622a3a191b77c075adac908138130c989db"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/HChaCha20.php": [
+      "4f670346620429b2aedb16f3018598d0c6772b48719fb01231af654fdf7cd2a4"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/HSalsa20.php": [
+      "ee0884706a0b59fd1e346420b734c40f7f528e24cfd1c45dc491b1f64ab07582"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Int32.php": [
+      "dff42d5e03045a57bdbdae417bc277c9d8ac96117e39ab01b205587f1c19cc9e"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Int64.php": [
+      "25363bea0769f796bcaacf77b014c014c8128c5c1a1232e7c6ad4bcf661a3f20"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Poly1305/State.php": [
+      "9d3ac97926d5e86d96d4179645ca23d16b3c60ba58f3cb82e468b699a9e61ea7"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Poly1305.php": [
+      "97babb05e989a164fadde055c4efd1f3fd306cd9f3e41fb8d8be910d4e74b86a"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Salsa20.php": [
+      "7500ed3a49401dd69341293627d33f5c300c3d89d5a67a40931d6daf9d734b97"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/SecretStream/State.php": [
+      "22f159f0c32748439170f03ff3735bb06e1e7a6bc5f30cf907c388ede721b97e"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/SipHash.php": [
+      "80228e14f6feeec9483e340e1e33a2330a91de70dce9049e2a25f4e19ea1f0b0"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Util.php": [
+      "78f690cb63b6292d3759a9ef588df55f497af822fa895d59cdbcbc23d00b0298"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/X25519.php": [
+      "640fd6b6bbae8659e2ece488eb57ec886b7d5adb9dafc88c6c1db66ef82cbba8"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/XChaCha20.php": [
+      "80ff1e308e00d96688b44ba5c89fdb3aae68618662ef4206162de7f8db03c689"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/XSalsa20.php": [
+      "e23aec8e591ea6ebe9260e67f32b335692c5e847b383beb705065ee6c676b630"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Crypto.php": [
+      "9d5ed20030a69f368bb2faf94f98a286daa581eadf52d453e1b9a35447948bc4"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/Crypto32.php": [
+      "ed89b3eccb14c5c47240a6bae06f2eed1cc8fd04a714d3581ed36e01b0601cd7"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/File.php": [
+      "5f596417a6bf7ab3db1b06d0d449afd856cf9fe149283dd3a5b8399eae5fea17"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/PHP52/SplFixedArray.php": [
+      "60af027395607c7d21fb3df14418a92d0af98db0f17256645bfae1987d961a8c"
+    ],
+    "libraries/vendor/paragonie/sodium_compat/src/SodiumException.php": [
+      "4dc4b39dfd4ec7932aa9680ee915ec5c407e3bf6699f3f694102b292543e8b04"
+    ],
+    "libraries/vendor/symfony/yaml/Dumper.php": [
+      "ca152bbb87d08b2e310cf8c0b3ae757270b67b4727fedfe3aca07920a4043bd0"
+    ],
+    "libraries/vendor/symfony/yaml/Escaper.php": [
+      "7465e3edc702a2ccf4356d7c57e3879dfa8b936c429067ebfd41f9197b12d57e"
+    ],
+    "libraries/vendor/symfony/yaml/Exception/DumpException.php": [
+      "900d5983ef9f952db1e90201498b340230900bb6975d9439e52a4a68ae1cd952"
+    ],
+    "libraries/vendor/symfony/yaml/Exception/ExceptionInterface.php": [
+      "5e84bad8f919800b191cf840d67a4be1f6aca0e5adfbecb2e45dc7281d7d3112"
+    ],
+    "libraries/vendor/symfony/yaml/Exception/ParseException.php": [
+      "9db40db3adb8a2d91cb67f0b416ac5b3aa7c15e2430abbb6c8a462042ab0d4dc"
+    ],
+    "libraries/vendor/symfony/yaml/Exception/RuntimeException.php": [
+      "cdd789c604d04bdc2bcaab0820c3b04c272aba4efffe998853b9450a454af26e"
+    ],
+    "libraries/vendor/symfony/yaml/Inline.php": [
+      "77ad5200763f8b6e8df21919cb9a96bf663f97787b85adf84128a8da97df248e",
+      "eb8d0e47eb998838afc54b43ea7ddf71b956e523d88220cc369ec34dbcc882ae"
+    ],
+    "libraries/vendor/symfony/yaml/LICENSE": [
+      "950c956cdbad9a22a9bf2fd200e6adf6f0c66a1daaaa19150c44f04c761d4cae"
+    ],
+    "libraries/vendor/symfony/yaml/Parser.php": [
+      "1b77269d5db1d1a6cb6ede8837d7a65c49ced7bc5fd78f63bb33c007375bf045",
+      "3939b30bb636921d9ae2e2d15a038ffe3eb77d0c5ef1db74ea7808c32fa6de02"
+    ],
+    "libraries/vendor/symfony/yaml/Unescaper.php": [
+      "be56a18e1b69f863ce4c82f708648b27704c6c2ec1d72e4b809f2236ff5c4470"
+    ],
+    "libraries/vendor/symfony/yaml/Yaml.php": [
+      "8209a7d5d34da41673e5a683fc7e935046adc58da99438382de0e67809b2e4ae"
+    ]
+  },
+  "upstream_files": {
+    "libraries/vendor/autoload.php": "7e8342877c68ac00c185f5f80403d36f2aa7405ef9304e5aece6dfcba4ac956f",
+    "libraries/vendor/composer/autoload_classmap.php": "1cad2f78baf1e104b246a9fd5782170bb978471bb3d54109a6df9361653abe16",
+    "libraries/vendor/composer/autoload_files.php": "7f255085234c6cf4ff4e78ae79fb0fcc84cf98e2d94f8fa448a77ae4de9ac90c",
+    "libraries/vendor/composer/autoload_namespaces.php": "889a6801f5fecb56a145275cb985693adc75e7e232b21b77adead721398e394a",
+    "libraries/vendor/composer/autoload_psr4.php": "b20e3412150f356cb3876507b10a163b9e32cd6c45edfdf3407824e552f34c51",
+    "libraries/vendor/composer/autoload_real.php": "2c9c4677089be5b9e26d9b745d938211af9e0465924dda759c3c48df15767311",
+    "libraries/vendor/composer/autoload_static.php": "c1d5f4a73951524ecd04d39a62b465e501aa8a9076dbb9def44a4f304d8a5bbe",
+    "libraries/vendor/composer/ClassLoader.php": "d4b2313e562edf942838ec316d983c1a3459ca67da3e5658e861200b0b3693c2",
+    "libraries/vendor/composer/installed.json": "7d0015c5ad4591c674d3e192a1594195c9a7e1499449f984f80ca97ebf4bf84c",
+    "libraries/vendor/composer/installed.php": "f395100641d8492640b1b345c08f57a0fad4151faaa6de083f1e23ec4e0ac04e",
+    "libraries/vendor/composer/InstalledVersions.php": "1e4525198301d1ed1f87ac3df2a8555a6f139f8df30a703d0b775a61963c96e4",
+    "libraries/vendor/composer/LICENSE": "c8cce4b6b9729f264ffdf9296d505d63432497feeed1f586d1902b942197e024",
+    "libraries/vendor/composer/platform_check.php": "efa64a484ec52731dd6445e314eed10d2c8f6a23286624a3535c4966076ac6c2",
+    "libraries/vendor/paragonie/sodium_compat/autoload-php7.php": "1578b1c6f97fe3bd1417e6b493c4f55b1666659b1e6dafa3b22d7730f90f1144",
+    "libraries/vendor/paragonie/sodium_compat/autoload.php": "6d07afe8f71a5cd49d55261a1d18467d1b5fbb9aff1ddfe71dae92a1a04f6731",
+    "libraries/vendor/paragonie/sodium_compat/composer-php52.json": "0d0817652921d0db24316057e183b2d8e74794a5d589c5f251598b2e1366052f",
+    "libraries/vendor/paragonie/sodium_compat/composer.json": "625889e17b2de0a4813d1d57ab177183bf069d6fb9600ac0f25ca7602e74e3f0",
+    "libraries/vendor/paragonie/sodium_compat/lib/constants.php": "e211d55b064f9f8c6994e16efc6d3308ef943ebf1845c8d224e694f2660c10c3",
+    "libraries/vendor/paragonie/sodium_compat/lib/namespaced.php": "476eb188ce7b66400c21748efb5accfc282ea02474a793042594452ee582392a",
+    "libraries/vendor/paragonie/sodium_compat/lib/php72compat.php": "45369eb57707c4b2b43333e57a018a3f2bc8372c35524189c70aa44e36592b74",
+    "libraries/vendor/paragonie/sodium_compat/lib/php72compat_const.php": "040aaf18aa07506264d40a64e83e8dc8e60a0c704bc5685f9301ec00fc527f07",
+    "libraries/vendor/paragonie/sodium_compat/lib/php84compat.php": "153ca2d911ca75988264abc5be241fd0331bbd5d2580fe502ec6e6f89361d388",
+    "libraries/vendor/paragonie/sodium_compat/lib/php84compat_const.php": "5164dd202126ef19dfdb7303347bb3c6977f9ef45c6b117c02fde01d3ab499d6",
+    "libraries/vendor/paragonie/sodium_compat/lib/ristretto255.php": "02ec4fdd5a82cc16b00f186a34e0595d41e93d154b09847f1bf4a021068d81df",
+    "libraries/vendor/paragonie/sodium_compat/lib/sodium_compat.php": "f5674de460faa89c032b8c62e885a16b6e60e04a71e953b8a0d8b82f389aae50",
+    "libraries/vendor/paragonie/sodium_compat/lib/stream-xchacha20.php": "2e1269a2d5bb91448bea51525d76c6eb33a70acf69eb412d8425ba04b8aaa28b",
+    "libraries/vendor/paragonie/sodium_compat/LICENSE": "1f74dfe6e7621f71daf7928dcd522a86dedd1118307fe48256e726d38effc8f7",
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Compat.php": "ae59dfb04b30ad6a6999d29826c86250393010df28c2f0e11b824280a6a579d4",
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/BLAKE2b.php": "ffd683c48ec5fdd38911303ae4f151d423c12bed750730514f698719f35bce18",
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/ChaCha20/Ctx.php": "61609cbbd05134d59342ff9ae3e77cf627be9dac73bde356f36ec1059afb4d3a",
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/ChaCha20/IetfCtx.php": "0574987a882e6b4e6b39ff0082f4e7a93f2db6b8fe0d39f2374c31f8a4dee867",
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/ChaCha20.php": "2482e70fd87c7bd235a340d2df60d88e806eb936b639044eb8732f2ccb3718f2",
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/Curve25519/Fe.php": "0c1bdcd6743d95c7ee0d1a16fb3956d30f974e95ab366144ecad2713d0dc668a",
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/Curve25519/Ge/Cached.php": "cc8aa08af8ef7e8589f8cd845cdaf34f476dffce15e9aedfa9442a07014a8e66",
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/Curve25519/Ge/P1p1.php": "28080eba6fa5689e36b6e2729e516487c5a796d22697b5bddab7a1832dd9671f",
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/Curve25519/Ge/P2.php": "bc5f9ffb87c43a7f260c90165ec7b1b4d4ef0a76aab1c033d635804577f37930",
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/Curve25519/Ge/P3.php": "bd61dcbf8084251ec6ced2b96e81a36782882d960fd853fffd701c075b020d01",
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/Curve25519/Ge/Precomp.php": "229c34972af661a6c2fffb9f46b048c4f2f871bd147433495d07afe15bc43a14",
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/Curve25519/H.php": "9f945f6b32f34b23282cb15654dbe5fd6c9b088d1c11aae62a932b45d01e2404",
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/Curve25519.php": "81e544f88b402e6d040741acae42e7846c24c971bf2420479e0e5be16c907bf8",
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/Ed25519.php": "2b40b5cc980b2c61cf11b3805b2e504ef285bcece051f31b5383ea3056a7569c",
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/HChaCha20.php": "ff0f44d534ca1a085ca503a5bc02f0fd5c8cce9ad0cdbd5ab69530497fc92f1d",
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/HSalsa20.php": "202dbf136f07f5fd1fb490d09cd310e621d016a75118494ca9bd35abd63a8190",
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/Poly1305/State.php": "cf3e7db368bd91f2b13823d393b2019c83eaddc8934cfcb83e85761740ab1699",
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/Poly1305.php": "db9e59e0d0ffff7e21f9d7a416de664bac98d0818653dc380af2422421198582",
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/Salsa20.php": "645f40cd76a9e39d9baa209314f15d9c05828b5c6170450c3e568a811f68c73d",
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/SipHash.php": "8ea1b29d750e901b8a774b716b354a8a6b8ae7b023c1ca5a009a0b67737cdaa3",
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/Util.php": "d17abbe67dbb87e9114f15365f5830de52f5eeea8f44f1265b32cd8c9ca78611",
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/X25519.php": "7df850a3b047b4d5a691df65e7398db6f8e5c029c0fe7195014cf6103d733c9f",
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/XChaCha20.php": "e98d67678cbd7c21d3a0b3a25b08da1ecdc83a67e607d00a9efb21fa462f48d6",
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Core/Xsalsa20.php": "87423b4f144440ef7b73bdac40bb7c844e2266df1b1aabcc3fec165b2780c5f6",
+    "libraries/vendor/paragonie/sodium_compat/namespaced/Crypto.php": "fd56b4cab6806a9c819332813af5b50f7be14143424d5f2243fadfa65fb66f47",
+    "libraries/vendor/paragonie/sodium_compat/namespaced/File.php": "7890c0a02a8667f6b1532da1a38623faf2af4c6cd5a00a1d54471b43934a3f81",
+    "libraries/vendor/paragonie/sodium_compat/README.md": "7ec03e9c3b282d4dd72c6ad9f4417a8bcf85a9a9d540faf08944f75b052fcc4e",
+    "libraries/vendor/paragonie/sodium_compat/src/Compat.php": "139362e4612380a35df023885794cf1b9de903fa661f059ff7b6389bea198bc8",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/AEGIS/State128L.php": "ab39d7ce243e6c202efd5d03b57da7b2f50c53cc6e9d9c9332aa40b95e13166e",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/AEGIS/State256.php": "d65eaf34883200b1346ffcd64f8086cdb995d3c0947922fb731938d5621cf481",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/AEGIS128L.php": "2b71db2fc9301d656887c97dd48504a12010b6af7824acfd0665da5e4496935e",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/AEGIS256.php": "300d456b41ba37cc0cc784f163a45234cd103e01437747c0a076bb429e55b0cf",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/AES/Block.php": "4d8d69d658c6d4f306314501b7b07f268ee799b5e1c601a510559b2e8dae4913",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/AES/Expanded.php": "d981af4c4ac849d885583e577cab12205a8a2b4ef0026a2cf51823f23112daf7",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/AES/KeySchedule.php": "c1942e7923f1bc9d3e8d4dfcf213d59a8f74d95283600a3f968e7d187ca3e10d",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/AES.php": "723c60d5fb6d3404f60791e579373e1a369f0ffb49fa8243825a2473cf5affc1",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Base64/Original.php": "226cf150cb230310d0b77ae4e462f706d0ddc950ea6547e032dd891fc57ddb0d",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Base64/UrlSafe.php": "34e40a8e88d16043f40bafd56d9de1501cfe72345845f5bff1982e56c24b37fa",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/BLAKE2b.php": "0b4411492b6e615e48cd280636d7bff795d5dcece452384b5529ac77c79e7f28",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/ChaCha20/Ctx.php": "f0e0638eeb041771d9e28cbe743b69e078af272066ed61ff5aa06fccbf895d13",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/ChaCha20/IetfCtx.php": "a141ca567f91dae9bc2d9aa0a3054fafd6bd1235492d6d5d38c9e9a8364c2023",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/ChaCha20.php": "6537d4546a688de3b6823a21bd3ec8ef65714df57937c8996e46aff707f34caf",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Curve25519/Fe.php": "16d1e163378754a173dcaaa97ee42799bc7e9965650d2c40e3d83b52d5a3cdc6",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Curve25519/Ge/Cached.php": "bbfeb1c884d3e64e223a6da86503154cd7cb478c812921dd31b50e71e252eae4",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Curve25519/Ge/P1p1.php": "a8860db08a54f9b598c2041cadf00589da180e2229eb175d782ae8da04845704",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Curve25519/Ge/P2.php": "7c57be8e8ea812c754ec0116fec5a85b62719ff18a6950b5923a04538e989f94",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Curve25519/Ge/P3.php": "9694bd0948d20cb45ca3f787e85013884d7df7b543a344838f1111713e9e576a",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Curve25519/Ge/Precomp.php": "cef6a5f25e9bb7863ee00dc0ed6a7a3b3f153c9daad3936d666da55f7e07327e",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Curve25519/H.php": "5bdca3663d50486dd4d1101cf90b10f5ef9fbb7ccbf6fca8c29487941ba348ae",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Curve25519/README.md": "2d8c95220c42f648c8bf10146f77997f4a23cf619ab4e5e0e76713f8cc79f7f6",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Curve25519.php": "3c6f2a25b3f7b52474c0ac678d0468b656c3c560d8aebf2f4cf8a434a72ce4b2",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Ed25519.php": "d020c66ab0879eb91f762e05b07e2786fcc1da6c100f05e6ff4c53e3c2873769",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/HChaCha20.php": "e18efdf82e55dde96447a791eed1b6012af2951c7efe64b2a25b8d2dafa007ac",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/HSalsa20.php": "15f474f45cea3fece4eac6177580835539cf63849316b37e1e99e4edd14bbca9",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Poly1305/State.php": "fc192e221f937aafc3cdc4b2ac1dd516f96553a75387762625f7fe56344bb144",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Poly1305.php": "6f78dc8121fed9cb4a02c1f7c2a915b2bd0f3b31e970175b5ed70013f899023e",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Ristretto255.php": "c64bcdf91a0ed26a151c084f885e1d6bc97c7f46c7f7b8f7a7e1ebf4fec1426f",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Salsa20.php": "ecff9a937af88fe087ff432b3dee096213890cf5377a2734edeec880547f360d",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/SecretStream/State.php": "dc1cd19328bfe6c69aeea9558adcd640f8c57a6fa1f9496dc7c6d3b2db50417e",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/SipHash.php": "e1297c4ff528824e08d6082a91ccb356261153005f4d18e68c71b54a30c4e65a",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/Util.php": "1d508481ef6bbb5ca9e453cf044777128c78a9a37d0a7ac211e713340b2525af",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/X25519.php": "1b0cd07db0ebd48be4ddf91dded5056d9b5a33f1802fd5db461e7b9cd062f6e3",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/XChaCha20.php": "0aac8cebdfa935bbd6fbbe145268934d656a2481de89bb049c9ce20fe5d8004b",
+    "libraries/vendor/paragonie/sodium_compat/src/Core/XSalsa20.php": "80151b03429b8d17ea792b4da7de33d1ee60b97b0a82bdaaa2fb98699a368322",
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/BLAKE2b.php": "520be088a2028f7633804179ad1843d4386a969acc754ee01b09c3e8b9b85b41",
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/ChaCha20/Ctx.php": "925785a84e1ecdf9e048a84b6fb806df3fd9b01d0431f9bc57574fa1d9518969",
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/ChaCha20/IetfCtx.php": "3d9cc2c6e0af0415b5d19c825eb7d62caa1299ee31ab68715982976b53c9d853",
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/ChaCha20.php": "b053fe8318c571b6c47102a6d66ac11230d8f48a776c7ff56631a85e4f02024d",
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Curve25519/Fe.php": "f4e6c38e08d6ece5ee49dfe197bf03be0dbc2e357f4d26413d14c85fcb479a4e",
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Curve25519/Ge/Cached.php": "1f35e8d649cb0527d40fd3c0e05623f4535a62e60c0dbb7b23b35fd4c223f80d",
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Curve25519/Ge/P1p1.php": "a73351127182d1548afa20c027288c8b23f4387b16b608efd6cf5b48b16ad800",
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Curve25519/Ge/P2.php": "c20e998d89be90f328b1931916fd676d2191b7a2a414367863a32a4d25d95afc",
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Curve25519/Ge/P3.php": "3435380807c5c1fdfd3e0a03f054119853fe9e82a18662c48fcfbae696b7125a",
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Curve25519/Ge/Precomp.php": "c8c09e1e6af63f3548a6e6ba5e792c466c4f85ac6a1e5338ee4ceae4f2c94e6a",
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Curve25519/H.php": "7809943ce7c07996f2da77548d9fcafaaf41cc1c32d7f448bdb0786577a4374e",
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Curve25519/README.md": "2d8c95220c42f648c8bf10146f77997f4a23cf619ab4e5e0e76713f8cc79f7f6",
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Curve25519.php": "41cf587b0c73b27b462711bd615e9f6608e4d457012b2564a1eda6096b8e6bba",
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Ed25519.php": "246f591436c4ba57a9cd18dadeedb4b49b11273d51840379c9c052a411d1ee82",
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/HChaCha20.php": "4f670346620429b2aedb16f3018598d0c6772b48719fb01231af654fdf7cd2a4",
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/HSalsa20.php": "ee0884706a0b59fd1e346420b734c40f7f528e24cfd1c45dc491b1f64ab07582",
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Int32.php": "dff42d5e03045a57bdbdae417bc277c9d8ac96117e39ab01b205587f1c19cc9e",
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Int64.php": "25363bea0769f796bcaacf77b014c014c8128c5c1a1232e7c6ad4bcf661a3f20",
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Poly1305/State.php": "0ac2f7789512ead254d7b4093853ca23a8415f191d626a3635ebeda7dd2036a0",
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Poly1305.php": "97babb05e989a164fadde055c4efd1f3fd306cd9f3e41fb8d8be910d4e74b86a",
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Salsa20.php": "7500ed3a49401dd69341293627d33f5c300c3d89d5a67a40931d6daf9d734b97",
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/SecretStream/State.php": "93a12c85f0379710573cb0bbdde7a1a4ff05b749d1d1e9ed2a9144f717ffe496",
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/SipHash.php": "80228e14f6feeec9483e340e1e33a2330a91de70dce9049e2a25f4e19ea1f0b0",
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/Util.php": "78f690cb63b6292d3759a9ef588df55f497af822fa895d59cdbcbc23d00b0298",
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/X25519.php": "640fd6b6bbae8659e2ece488eb57ec886b7d5adb9dafc88c6c1db66ef82cbba8",
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/XChaCha20.php": "80ff1e308e00d96688b44ba5c89fdb3aae68618662ef4206162de7f8db03c689",
+    "libraries/vendor/paragonie/sodium_compat/src/Core32/XSalsa20.php": "e23aec8e591ea6ebe9260e67f32b335692c5e847b383beb705065ee6c676b630",
+    "libraries/vendor/paragonie/sodium_compat/src/Crypto.php": "d93de40d8523a69ee42e825341f9b4c35099b307c8a8c2713c80cc74d0e651a2",
+    "libraries/vendor/paragonie/sodium_compat/src/Crypto32.php": "ed89b3eccb14c5c47240a6bae06f2eed1cc8fd04a714d3581ed36e01b0601cd7",
+    "libraries/vendor/paragonie/sodium_compat/src/File.php": "3dad8bc45a4319e975cd8852fb7433b8199d4c0c727fe5598d685f1569c21080",
+    "libraries/vendor/paragonie/sodium_compat/src/PHP52/SplFixedArray.php": "466be1d4bfe69cf86963b8bb69917c4398900122c4885a5a89d9c891ffdf353d",
+    "libraries/vendor/paragonie/sodium_compat/src/SodiumException.php": "4dc4b39dfd4ec7932aa9680ee915ec5c407e3bf6699f3f694102b292543e8b04",
+    "libraries/vendor/symfony/deprecation-contracts/CHANGELOG.md": "73122a1fa6a74b5d5235721839bef8f2756e0c0927feeeea36b141417bcea164",
+    "libraries/vendor/symfony/deprecation-contracts/composer.json": "30ddc75071e90e19f1f4a216142b64e90253eb699dee65afb4a10f24e9c4a364",
+    "libraries/vendor/symfony/deprecation-contracts/function.php": "28ff48c6827a3a6dd17fae162e81f6ce89412b4c9cebd91d9642bc3b40c1b41d",
+    "libraries/vendor/symfony/deprecation-contracts/LICENSE": "b92809182501f0fa422167ea44484b41877e1736e8283d0377fdc9664bb9a02d",
+    "libraries/vendor/symfony/deprecation-contracts/README.md": "41780bacb2348c6e8bfac5ef843cfab5ca8e3d0c0ceae23090173072dc459880",
+    "libraries/vendor/symfony/yaml/CHANGELOG.md": "5c8d153b0ac3d73d43a28bf75edee5d71c8e4f357412b1743c32a2199a540e63",
+    "libraries/vendor/symfony/yaml/Command/LintCommand.php": "26c6ad32a2aef96daf4f15c6716fa87b193128daa0c8060a5773b1db827a306c",
+    "libraries/vendor/symfony/yaml/composer.json": "63db5256d73dc917bb8df7d10a2976e1f9b87ee1193d5724279755e4af466d5e",
+    "libraries/vendor/symfony/yaml/Dumper.php": "d2442668b265950d415f2825f51d1dfd986ab5c5cd98394c3f646b471d2ecb37",
+    "libraries/vendor/symfony/yaml/Escaper.php": "88bdbdeaf71c39babf68a92f4fb41f149142fab13c79e18b36dfafd428884ec4",
+    "libraries/vendor/symfony/yaml/Exception/DumpException.php": "900d5983ef9f952db1e90201498b340230900bb6975d9439e52a4a68ae1cd952",
+    "libraries/vendor/symfony/yaml/Exception/ExceptionInterface.php": "bff143d97e975f1ee6a5860a2b7138329c7336e3748529215a62824659ce8e93",
+    "libraries/vendor/symfony/yaml/Exception/ParseException.php": "90d5da61429e88b5184943b29b33bcd70775e1196ef79c4ea0fba8d509c7a5a7",
+    "libraries/vendor/symfony/yaml/Exception/RuntimeException.php": "cdd789c604d04bdc2bcaab0820c3b04c272aba4efffe998853b9450a454af26e",
+    "libraries/vendor/symfony/yaml/Inline.php": "822cae461c6075526d668a80ab9338058f282f30523ba68204a685131b11ae8d",
+    "libraries/vendor/symfony/yaml/LICENSE": "18da7e490d2aa77197a0619b25bcc771a0110132a9d76071665718d3295e73cb",
+    "libraries/vendor/symfony/yaml/Parser.php": "ea55521bdbccb43805f24619cfece45aeeab3575155b901eb3f808ed1dfdd639",
+    "libraries/vendor/symfony/yaml/ParserState.php": "b4407034736f5492b4379c848da7fed566abc3e27943d3d773fc81a4cbc9d2db",
+    "libraries/vendor/symfony/yaml/README.md": "9e4962d176930420191a04641852d236a23051e689f23fea97b27db9abf5abba",
+    "libraries/vendor/symfony/yaml/Resources/bin/yaml-lint": "121f8c34228edf74606fb6eae8659ea85b8f28899d7fff9b746aba8e1390e313",
+    "libraries/vendor/symfony/yaml/Tag/TaggedValue.php": "864eb02682eafdd0d092854fa93ddbe4fd49692f9d4bc99c36ebc3feca1b71d5",
+    "libraries/vendor/symfony/yaml/Unescaper.php": "bb43857e752657b550541b04788ad939d9c586c91d34694da5cea0b055ca1b5c",
+    "libraries/vendor/symfony/yaml/Yaml.php": "08146d66d2b91956610cc949ecf465cdc36b8fd27d610ce83c62c659e9a171e2"
+  }
+}
