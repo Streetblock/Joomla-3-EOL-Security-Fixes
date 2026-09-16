@@ -1,5 +1,5 @@
 # Joomla 3 EOL Security Fixes 
-## Streetblock fork: additional fix (unreleased)
+## Streetblock fork: additional fixes (unreleased)
 
 This fork adds the August 18, 2026 fix for **CVE-2026-71572** (response header injection in download views) to upstream version 1.1.4. It removes double quotes from the filename portion of the Content-Disposition header in contact vCard downloads and banner tracking exports, following the official Joomla 5.4.8 correction. Download contents and ordinary filenames are preserved.
 
@@ -7,6 +7,12 @@ This fork adds the August 18, 2026 fix for **CVE-2026-71572** (response header i
 - [Official release comparison](https://github.com/joomla/joomla-cms/compare/5.4.7...5.4.8)
 - Upstream base: `389fee29da18a71a50baa400cb0bdf5c9f106bfb`.
 - Run the isolated view regression tests with `php -n tests/download-headers.php`. No Joomla installation, database or web server is needed. Tests exercise the actual packaged view classes with test doubles for Joomla services.
+
+This fork also backports **CVE-2026-73373** from Joomla **5.4.8 and 6.1.3**: `.shtml`, `.shtm`, `.sht` and `.stm` are added to the dangerous upload extensions. The Joomla 3 central upload filter, media helper, template helper and existing media controller check are covered. Extension checks in the helpers also handle mixed case and embedded extensions such as `document.SHTML.txt`.
+
+- [Official SHTML upload advisory](https://developer.joomla.org/security-centre/1077-20260810-core-unrestricted-uploads-of-shtml-files.html)
+- [Backport provenance, scope and validation](docs/CVE-2026-73373.md)
+- Run `php -n tests/ssi-uploads.php`: 172 checks exercise the actual packaged validators with harmless temporary files and permissive test settings. There is no upload to a server or SSI execution.
 
 This is an unreleased source change, not a complete Joomla security update or a claim that all August advisories are covered. The upstream installer still overwrites core files without backups and may report success after individual copy failures. Verify each installed file and test a backup copy of the site before deployment. Existing language-parser compatibility limitations also apply. The upstream release history below is retained for reference.
 

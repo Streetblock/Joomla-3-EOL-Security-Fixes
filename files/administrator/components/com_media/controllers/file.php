@@ -122,7 +122,7 @@ class MediaControllerFile extends JControllerLegacy
 			 */
 			// Strictly prevent upload of executable PHP or system extensions
 			$ext = strtolower(JFile::getExt($file['name']));
-			$forbidden = array('php', 'phtml', 'php5', 'php7', 'phps', 'shtml', 'pl', 'py', 'cgi', 'asp', 'aspx');
+			$forbidden = array('php', 'phtml', 'php5', 'php7', 'phps', 'shtml', 'shtm', 'sht', 'stm', 'pl', 'py', 'cgi', 'asp', 'aspx');
 			
 			if (in_array($ext, $forbidden))
 			{
