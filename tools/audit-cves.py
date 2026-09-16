@@ -206,6 +206,24 @@ def main():
         for wrapper in response['vulnerabilities']:
             nvd[wrapper['cve']['id']] = wrapper['cve']
 
+    # Retain the stock-version baseline and query packaged versions separately.
+    packaged_dependencies = []
+    installed_path = ROOT / 'files/libraries/vendor/composer/installed.json'
+    if installed_path.exists():
+        installed = json.loads(installed_path.read_text(encoding='utf-8'))['packages']
+        queries = [({'commit': p['source']['reference']} if p['version'].startswith('dev-') else
+                    {'package': {'name': p['name'], 'ecosystem': 'Packagist'}, 'version': p['version'].lstrip('v')})
+                   for p in installed]
+        payload = {'queries': queries}
+        query_hash = hashlib.sha256(json.dumps(payload).encode()).hexdigest()[:16]
+        current_osv = json.loads(fetch('https://api.osv.dev/v1/querybatch', 'osv-packaged-' + query_hash + '.json', payload))
+        if len(current_osv['results']) != len(installed):
+            raise RuntimeError('Packaged dependency OSV result count mismatch')
+        for package, match in zip(installed, current_osv['results']):
+            packaged_dependencies.append(dict(package=package['name'], version=package['version'],
+                findings=[json.loads(fetch('https://api.osv.dev/v1/vulns/' + v['id'], 'osv-' + v['id'] + '.json'))
+                          for v in match.get('vulns', [])]))
+
     review_path = ROOT / 'docs/cve-review.json'
     reviews = json.loads(review_path.read_text(encoding='utf-8')) if review_path.exists() else {}
     readme = (ROOT / 'README.md').read_text(encoding='utf-8')
@@ -233,7 +251,8 @@ def main():
                          description=' '.join(descriptions), references=refs,
                          nvd_configurations=cve.get('configurations', [])))
     result = dict(generated_utc=dt.datetime.now(dt.timezone.utc).isoformat(), since=args.since, until=args.until,
-                  sources=sources, dependencies=dependencies, nvd_keyword_total=keyword_total, official_cve_count=len(items),
+                  sources=sources, dependencies=dependencies, packaged_dependencies=packaged_dependencies,
+                  nvd_keyword_total=keyword_total, official_cve_count=len(items),
                   limitations=['Keyword search is not an inventory of installed third-party extensions or all bundled dependencies.',
                                'README mentions are claims only; code review and targeted tests are required.',
                                'Outside an advisory range does not prove an EOL branch unaffected; confirm code paths.',

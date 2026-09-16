@@ -2,7 +2,7 @@
 
 This fork retains local regression tests and detailed review notes. The base was TLWebdesign commit `389fee29da18a71a50baa400cb0bdf5c9f106bfb` (version 1.1.4). The public README describes behavior and installation requirements without fork-specific branding.
 
-The current source prepares fork package **1.2.1**, dated September 16, 2026, including the post-EOL audit backports. Joomla's core version remains **3.10.12**; only the additional EOL marker includes the package version. These metadata changes are separate from the implementation and fork tests. Updating `main` does not publish a GitHub release or deploy the package to a website.
+The current source prepares fork package **1.3.0**, dated September 16, 2026, including the post-EOL audit backports and complete PHP-7.4-compatible library updates. Joomla's core version remains **3.10.12**; only the additional EOL marker includes the package version. These metadata changes are separate from the implementation and fork tests. Updating `main` does not publish a GitHub release or deploy the package to a website.
 
 ## Future upstream pull requests
 
@@ -22,6 +22,8 @@ php -n tools/checksums.php --check
 php -n tests/download-headers.php
 php -n tests/ssi-uploads.php
 php -n tests/installer.php
+php -n tests/installer-dependencies.php
+php -n tests/package-install.php /path/to/original-joomla-3.10.12
 php -n tests/post-eol-regressions.php
 php -n tests/batch-copy-acl.php
 php -n tests/tags-ordering.php
@@ -30,7 +32,9 @@ php -n tests/output-and-module-acl.php /path/to/original-joomla-3.10.12
 php -n tests/package-preflight.php /path/to/original-joomla-3.10.12
 ```
 
-Run `php -n tools/checksums.php` after changing packaged replacement files or the XML version and commit the resulting inventory. Files under `files/` use LF line endings so release builds and clones agree on raw SHA-256 checksums.
+Run `php -n tools/checksums.php` after changing packaged replacement files or the XML version and commit the resulting inventory. Core replacements use LF line endings. Official vendor packages and generated Composer files are preserved byte-for-byte with `-text` attributes; do not normalize their whitespace. `tools/checksums.php` also verifies them against `DEPENDENCIES.json`.
+
+The [library update review](docs/DEPENDENCY-UPDATES.md) records build inputs, the PHP 7.4 tests and compatibility limits. Prefer complete upstream library releases; retain vendor backports only when a compatible official release lacks required fixes.
 
 The security regression tests are harmless demonstrations of specific faulty behavior plus compatibility checks. They do not execute SSI, attack a live site, or prove that the entire site is secure. Installer tests inject failures into real file operations in isolated temporary directories; Joomla services are test doubles. They cover normal install/update, incomplete and altered packages, version mismatch, failed backups, partial/corrupt copies, restoration failure, concurrent installation locks and final verification failure. A full Joomla installation on the production PHP version still needs staging validation.
 
