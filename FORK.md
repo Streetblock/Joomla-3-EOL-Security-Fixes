@@ -22,8 +22,16 @@ php -n tools/checksums.php --check
 php -n tests/download-headers.php
 php -n tests/ssi-uploads.php
 php -n tests/installer.php
+php -n tests/post-eol-regressions.php
+php -n tests/batch-copy-acl.php
+php -n tests/tags-ordering.php
+php -n tests/yaml-limits.php /path/to/original-joomla-3.10.12
+php -n tests/output-and-module-acl.php /path/to/original-joomla-3.10.12
+php -n tests/package-preflight.php /path/to/original-joomla-3.10.12
 ```
 
 Run `php -n tools/checksums.php` after changing packaged replacement files or the XML version and commit the resulting inventory. Files under `files/` use LF line endings so release builds and clones agree on raw SHA-256 checksums.
 
 The security regression tests are harmless demonstrations of specific faulty behavior plus compatibility checks. They do not execute SSI, attack a live site, or prove that the entire site is secure. Installer tests inject failures into real file operations in isolated temporary directories; Joomla services are test doubles. They cover normal install/update, incomplete and altered packages, version mismatch, failed backups, partial/corrupt copies, restoration failure, concurrent installation locks and final verification failure. A full Joomla installation on the production PHP version still needs staging validation.
+
+The [September CVE audit](docs/CVE-AUDIT-2026-09-16.md) explains the database queries, all 79 core/dependency reviews, additional fixes and remaining gaps. Its [matrix](docs/cve-matrix.md), raw normalized [inventory](docs/cve-inventory.json), manual [review decisions](docs/cve-review.json) and `tools/audit-cves.py` are fork-only assets. A future upstream PR can cite the results without adding these directories.
