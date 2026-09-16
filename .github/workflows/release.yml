@@ -66,6 +66,7 @@ jobs:
 
           php -d error_reporting='E_ALL & ~E_DEPRECATED' -l script.php
           php -r 'new SimpleXMLElement(file_get_contents("joomla3eolsecurityfixes.xml"));'
+          php -n tools/checksums.php --check
 
           while IFS= read -r -d '' file; do
             php -d error_reporting='E_ALL & ~E_DEPRECATED' -l "${file}"
@@ -81,6 +82,8 @@ jobs:
             files \
             joomla3eolsecurityfixes.xml \
             script.php \
+            checksums.json \
+            README.md \
             LICENSE \
             -x '*.DS_Store'
 

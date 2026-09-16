@@ -1,4 +1,9 @@
+* text=auto eol=lf
 updates.xml export-ignore
 .gitignore export-ignore
 .gitattributes export-ignore
-README.md export-ignore
+.github export-ignore
+tests export-ignore
+docs export-ignore
+tools export-ignore
+FORK.md export-ignore

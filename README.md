@@ -1,23 +1,29 @@
 # Joomla 3 EOL Security Fixes 
-## Streetblock fork: additional fixes (unreleased)
+## Additional changes (unreleased)
 
-This fork adds the August 18, 2026 fix for **CVE-2026-71572** (response header injection in download views) to upstream version 1.1.4. It removes double quotes from the filename portion of the Content-Disposition header in contact vCard downloads and banner tracking exports, following the official Joomla 5.4.8 correction. Download contents and ordinary filenames are preserved.
+**CVE-2026-71572:** Remove double quotes from filenames in contact vCard and banner tracking download headers, following Joomla 5.4.8. Download contents and ordinary filenames are preserved.
 
 - [Official advisory](https://developer.joomla.org/security-centre/1068-20260801-core-response-header-injection-in-download-views.html)
 - [Official release comparison](https://github.com/joomla/joomla-cms/compare/5.4.7...5.4.8)
-- Upstream base: `389fee29da18a71a50baa400cb0bdf5c9f106bfb`.
-- Run the isolated view regression tests with `php -n tests/download-headers.php`. No Joomla installation, database or web server is needed. Tests exercise the actual packaged view classes with test doubles for Joomla services.
 
-This fork also backports **CVE-2026-73373** from Joomla **5.4.8 and 6.1.3**: `.shtml`, `.shtm`, `.sht` and `.stm` are added to the dangerous upload extensions. The Joomla 3 central upload filter, media helper, template helper and existing media controller check are covered. Extension checks in the helpers also handle mixed case and embedded extensions such as `document.SHTML.txt`.
+**CVE-2026-73373:** Backport the `.shtml`, `.shtm`, `.sht` and `.stm` restrictions from Joomla 5.4.8 and 6.1.3 to the central upload filter, media helper, template helper and media controller. Helper checks also handle mixed case and embedded extensions such as `document.SHTML.txt`.
 
 - [Official SHTML upload advisory](https://developer.joomla.org/security-centre/1077-20260810-core-unrestricted-uploads-of-shtml-files.html)
-- [Backport provenance, scope and validation](docs/CVE-2026-73373.md)
-- Run `php -n tests/ssi-uploads.php`: 172 checks exercise the actual packaged validators with harmless temporary files and permissive test settings. There is no upload to a server or SSI execution.
 
-This is an unreleased source change, not a complete Joomla security update or a claim that all August advisories are covered. The upstream installer still overwrites core files without backups and may report success after individual copy failures. Verify each installed file and test a backup copy of the site before deployment. Existing language-parser compatibility limitations also apply. The upstream release history below is retained for reference.
+**Installer:** Validate Joomla 3.10.12, the complete package inventory, SHA-256 checksums and every target before replacement. Back up and verify the current files before writing; verify replacements and attempt rollback on failure. Report file verification rather than claiming the entire site is secure. Keep the extension record instead of automatically uninstalling it.
 
-This plugin will help you update the files associated with the known security fixes as listed below.
-It will overwrite the files and then auto uninstalls itself again.
+These are selected backports, not a complete Joomla security update or coverage of every August advisory. Existing language-parser compatibility limitations also apply. The previous release history below is retained for reference.
+
+## Installation and recovery
+
+1. Take a full site and database backup. Test on a protected copy with the production PHP version. Review local modifications to the files being replaced: existing custom changes are backed up but will be overwritten.
+2. Create a private directory writable by PHP **outside all publicly served directories**, including virtual-host aliases. The default is `joomla3-eol-backups` beside the Joomla root. Alternatively, add `public $eol_security_backup_path = '/absolute/private/backup/path';` inside the `JConfig` class in `configuration.php`. The installer rejects a backup path inside Joomla; it cannot detect every web-server alias. Restrict directory permissions to the PHP account (0700 on Unix; equivalent Windows ACLs).
+3. Put the site in maintenance mode and prevent concurrent requests/updates during replacement. This multi-file update is not atomic. Install the package containing `checksums.json`; missing source or target files cause an abort. Symlinked replacement paths are unsupported. Direct PHP filesystem access is required; Joomla's FTP layer is not used.
+4. Require the explicit message that all replacement files were verified. Keep the reported backup directory and its `restore.json`, which maps each relative path to its backup filename and before/after checksums. A Joomla version marker alone is not proof. Then test site functions before reopening.
+
+On a copy or verification failure, the installer restores attempted replacements and verifies their original hashes. If restoration fails, it reports **RESTORE FAILED**; keep the site offline and restore the affected files from the retained backup (or your full site backup). A process crash, disk failure or later Joomla metadata failure may require manual recovery. Removing the retained extension entry does **not** undo the patches. These backups cover replacement files only, not the database or the rest of the site.
+
+The checksum inventory detects incomplete or changed package files; it is not a publisher signature and does not check whether the existing site is compromised. Keep the inventory synchronized when preparing a package. Runtime installation does not require the fork's test or documentation directories.
 
 ## Version 1.1.4 fixes the below security issues (it also contains all previous versions fixes)
 - [20260702] — Core — Incorrect Access Control in com_contact vcf download (CVE-2026-48948). More info: https://developer.joomla.org/security-centre/1056-20260702-core-incorrect-access-control-in-com-contact-vcf-download.html
