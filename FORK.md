@@ -2,6 +2,8 @@
 
 This fork retains local regression tests and detailed review notes. The base was TLWebdesign commit `389fee29da18a71a50baa400cb0bdf5c9f106bfb` (version 1.1.4). The public README describes behavior and installation requirements without fork-specific branding.
 
+The current source prepares fork package **1.2.0**, dated September 16, 2026. Joomla's core version remains **3.10.12**; only the additional EOL marker includes the package version. These metadata changes are separate from the installer implementation and fork tests. Updating `main` does not publish a GitHub release or deploy the package to a website.
+
 ## Future upstream pull requests
 
 Create a dedicated branch from the current upstream branch and transfer only the intended changes. Do not open a PR directly from this fork's `main` or blindly cherry-pick commits containing fork-only files.

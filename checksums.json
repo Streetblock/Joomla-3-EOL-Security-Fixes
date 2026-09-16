@@ -1,5 +1,5 @@
 {
-    "version": "1.1.4",
+    "version": "1.2.0",
     "files": {
         "administrator/components/com_ajax/ajax.php": "591f5965fae374973e166fca073d7abdd884e5ac0d607083efda21fd2f2f403b",
         "administrator/components/com_associations/views/association/tmpl/edit.php": "aee7f14bf2d3c1e23242cc2b3c09fac87ef5a05997cdd4cd2014cad78e618cce",
@@ -62,7 +62,7 @@
         "libraries/src/MVC/View/HtmlView.php": "46330160a9f0123f46b796d47b646f2a41f82a29a4228e66004091884a686158",
         "libraries/src/Pagination/Pagination.php": "449870afff4c79d4f456a0585762ed9197ecc9b3e3761a986a51926fde9570c5",
         "libraries/src/Uri/Uri.php": "327f77877a62110165b950b932eea3543e99ccc0475aaf583bae5a93ba9e5dd2",
-        "libraries/src/Version.php": "841c9fdf98ffe95868cabf6f2dc2e692a1b236497634b1a777694717240a1667",
+        "libraries/src/Version.php": "ded2b7f97a72d4b350145d97900844956a4bbf017f5873b39a66a427b82f100a",
         "libraries/vendor/joomla/filter/src/InputFilter.php": "5015a37a0c85e25e39de7f538556615ef2097bace683459ac47b55dbc71382c8",
         "libraries/vendor/joomla/filter/src/OutputFilter.php": "a40091876db269715eb05df23fd92688cdf2e693e7116e30ff2817a822770155",
         "modules/mod_custom/mod_custom.xml": "185209743ce28cf5bb231de4c0dd6dda802154fc9e9d3a1e37a5e7fac2892bee",
