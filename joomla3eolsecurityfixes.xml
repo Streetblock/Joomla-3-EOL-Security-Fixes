@@ -2,8 +2,8 @@
 <extension type="file" version="3.10" method="upgrade">
     <name>Joomla 3 EOL Security Fixes (2026 Update)</name>
     <author>Tom van der Laan || TLWebdesign (Updated by N8Solutions)</author>
-    <creationDate>2026-09-16</creationDate>
-    <version>1.3.0</version>
+    <creationDate>2026-09-17</creationDate>
+    <version>1.4.0-dev</version>
     <description><![CDATA[Selected security backports and complete dependency updates for Joomla 3.10.12 on PHP 7.4 or later. Replacement files are backed up and verified; the installation record is retained. This package does not certify the security of the entire site. Read README.md for backup directory setup and staging requirements.]]></description>
     <scriptfile>script.php</scriptfile>
 </extension>

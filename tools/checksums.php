@@ -20,6 +20,17 @@ foreach (array('additions', 'removals', 'accepted_targets') as $key) {
 foreach ($dependencies['upstream_files'] as $path => $digest) {
     if (!isset($files[$path]) || $files[$path] !== $digest) { throw new RuntimeException('Official dependency file changed: ' . $path); }
 }
+// Non-vendor additions/removals are maintained separately from upstream provenance.
+$plan = json_decode(file_get_contents($root . '/INSTALLATION.json'), true);
+foreach (array('additions', 'removals', 'accepted_targets') as $key) {
+    if (!isset($plan[$key]) || !is_array($plan[$key])) { throw new RuntimeException('Invalid installation plan'); }
+    if ($key === 'additions') {
+        $inventory[$key] = array_values(array_unique(array_merge($inventory[$key], $plan[$key])));
+    } else {
+        if (array_intersect(array_keys($inventory[$key]), array_keys($plan[$key]))) { throw new RuntimeException('Conflicting installation plan'); }
+        $inventory[$key] = array_merge($inventory[$key], $plan[$key]);
+    }
+}
 $json = json_encode($inventory, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n";
 if (in_array('--check', $argv, true)) {
     if (@file_get_contents($root . '/checksums.json') !== $json) { fwrite(STDERR, "Package checksums are stale. Run php tools/checksums.php.\n"); exit(1); }

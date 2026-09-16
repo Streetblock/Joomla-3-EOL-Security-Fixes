@@ -1,4 +1,21 @@
 # Joomla 3 EOL Security Fixes 
+## Experimental branch: login throttling (1.4.0-dev)
+
+This branch adds optional password-login throttling before Joomla's authentication plugins. It is **disabled by default**. Blocked sources receive the ordinary login failure response even when submitting correct credentials; existing controller statuses and redirects remain unchanged. No special 429 response or retry header is sent. Rejection is early and may be measurably faster than password verification; this does not promise an undetectable block.
+
+For a protected **single-host staging installation**, create a private directory outside all served paths (Unix mode 0700 or equivalent Windows ACLs), then add these properties inside `JConfig` in `configuration.php`:
+
+```php
+public $eol_login_throttle = true;
+public $eol_login_throttle_path = '/private/joomla-login-throttle';
+```
+
+The existing site `secret` must be at least 32 bytes. Defaults are 50 failed checks per source and 20 per account across IPs in a 10-minute observation window; blocks last 15 minutes, doubling for repeat offences up to one hour. Denied requests do not extend the active block. IPv6 sources share a /64 budget. Only `REMOTE_ADDR` is trusted; configure proxy address handling in the web server. Shared IPs and targeted account attacks can block legitimate users too.
+
+The private store includes HMAC account identifiers, bounded counters, in-flight reservations and rotating audit summaries distinguishing failed checks from denied requests. Corrupt/full/unavailable state denies password logins. Keep out-of-band configuration access: setting `eol_login_throttle = false` restores the original behavior. This does not protect existing sessions, stock passwordless remember-me flows or third-party login implementations outside Joomla's authentication entry point.
+
+The branch has isolated PHP/filesystem tests, including parallel processes. It has **not** been validated as a full database-backed Joomla website with browser logins. Test actual frontend/backend, 2FA, recovery and installed extensions before enabling. No production deployment or release is implied by this branch.
+
 ## Additional changes (unreleased)
 
 This package requires **Joomla 3.10.12 and PHP 7.4 or later**. PHP 7.4.33 on 64-bit Windows is the tested compatibility target; verify the actual web-server PHP runtime on staging.

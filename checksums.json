@@ -1,5 +1,5 @@
 {
-    "version": "1.3.0",
+    "version": "1.4.0-dev",
     "files": {
         "administrator/components/com_ajax/ajax.php": "591f5965fae374973e166fca073d7abdd884e5ac0d607083efda21fd2f2f403b",
         "administrator/components/com_associations/views/association/tmpl/edit.php": "5756872885a6a50eee69c4680a2274774f4fdd0b37020c13233a06caab2ff90a",
@@ -68,6 +68,8 @@
         "layouts/joomla/html/image.php": "d125978f81252bd19d2ee67c8c1b8bfd993e37c0f5dd896bcdfdda46fca34525",
         "libraries/cms/html/string.php": "48eed8e43749903ee3d945e356465cfb7bbbcaa06c520cbca1c781eb187fa0b8",
         "libraries/joomla/database/driver.php": "ae4b896417aa0c4ff52ea2483dd1045f3a90f40fe5d31064e23a5fa8265b8aea",
+        "libraries/src/Authentication/Authentication.php": "31dcd5ab77e1a76cee4de4d984a9f399c4773c33145d05483a1e7d827e9de2d0",
+        "libraries/src/Authentication/LoginThrottle.php": "9749329ba9971dd57002072a81327ba57d6af0d5d38419455c187da173cb94a4",
         "libraries/src/Cache/Cache.php": "f9ff28529dbe89f75ca5832804040fa01274fdf315f3e124ceafbdc0f957d67c",
         "libraries/src/Filter/InputFilter.php": "393427535bc3baee13a321f9bd312bb1ea0a271bfa99850eb6fedc7d3999fe55",
         "libraries/src/Form/Rule/UrlRule.php": "bda7d974a72c804e1f608bebb021308920606b537ecc3fbc5b6ea9581b8e9bb5",
@@ -78,7 +80,7 @@
         "libraries/src/MVC/View/HtmlView.php": "46330160a9f0123f46b796d47b646f2a41f82a29a4228e66004091884a686158",
         "libraries/src/Pagination/Pagination.php": "449870afff4c79d4f456a0585762ed9197ecc9b3e3761a986a51926fde9570c5",
         "libraries/src/Uri/Uri.php": "327f77877a62110165b950b932eea3543e99ccc0475aaf583bae5a93ba9e5dd2",
-        "libraries/src/Version.php": "48079e7d0328007ace3e7abdb6bd4a66d392f7627ffd2e684ed0d0bf767b80ad",
+        "libraries/src/Version.php": "845f9be23bb8e1d45f1e96cb060015e743d07496d9d44f9b298990bea99fb840",
         "libraries/vendor/autoload.php": "7e8342877c68ac00c185f5f80403d36f2aa7405ef9304e5aece6dfcba4ac956f",
         "libraries/vendor/composer/ClassLoader.php": "d4b2313e562edf942838ec316d983c1a3459ca67da3e5658e861200b0b3693c2",
         "libraries/vendor/composer/InstalledVersions.php": "1e4525198301d1ed1f87ac3df2a8555a6f139f8df30a703d0b775a61963c96e4",
@@ -263,7 +265,8 @@
         "libraries/vendor/symfony/yaml/ParserState.php",
         "libraries/vendor/symfony/yaml/README.md",
         "libraries/vendor/symfony/yaml/Resources/bin/yaml-lint",
-        "libraries/vendor/symfony/yaml/Tag/TaggedValue.php"
+        "libraries/vendor/symfony/yaml/Tag/TaggedValue.php",
+        "libraries/src/Authentication/LoginThrottle.php"
     ],
     "removals": {
         "libraries/vendor/paragonie/sodium_compat/autoload-fast.php": [
@@ -641,6 +644,9 @@
         ],
         "libraries/vendor/symfony/yaml/Yaml.php": [
             "8209a7d5d34da41673e5a683fc7e935046adc58da99438382de0e67809b2e4ae"
+        ],
+        "libraries/src/Authentication/Authentication.php": [
+            "3feacb676a8fc4c5ecd82bf5a402057c6e080f8342adfd5e253520805c246cd2"
         ]
     }
 }

@@ -84,6 +84,7 @@ jobs:
             script.php \
             checksums.json \
             DEPENDENCIES.json \
+            INSTALLATION.json \
             README.md \
             LICENSE \
             -x '*.DS_Store'

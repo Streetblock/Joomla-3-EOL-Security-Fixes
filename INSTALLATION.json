@@ -1,0 +1,11 @@
+{
+  "additions": [
+    "libraries/src/Authentication/LoginThrottle.php"
+  ],
+  "removals": {},
+  "accepted_targets": {
+    "libraries/src/Authentication/Authentication.php": [
+      "3feacb676a8fc4c5ecd82bf5a402057c6e080f8342adfd5e253520805c246cd2"
+    ]
+  }
+}
