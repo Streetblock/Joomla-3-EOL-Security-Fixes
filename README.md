@@ -1,4 +1,15 @@
 # Joomla 3 EOL Security Fixes 
+## Streetblock fork: additional fix (unreleased)
+
+This fork adds the August 18, 2026 fix for **CVE-2026-71572** (response header injection in download views) to upstream version 1.1.4. It removes double quotes from the filename portion of the Content-Disposition header in contact vCard downloads and banner tracking exports, following the official Joomla 5.4.8 correction. Download contents and ordinary filenames are preserved.
+
+- [Official advisory](https://developer.joomla.org/security-centre/1068-20260801-core-response-header-injection-in-download-views.html)
+- [Official release comparison](https://github.com/joomla/joomla-cms/compare/5.4.7...5.4.8)
+- Upstream base: `389fee29da18a71a50baa400cb0bdf5c9f106bfb`.
+- Run the isolated view regression tests with `php -n tests/download-headers.php`. No Joomla installation, database or web server is needed. Tests exercise the actual packaged view classes with test doubles for Joomla services.
+
+This is an unreleased source change, not a complete Joomla security update or a claim that all August advisories are covered. The upstream installer still overwrites core files without backups and may report success after individual copy failures. Verify each installed file and test a backup copy of the site before deployment. Existing language-parser compatibility limitations also apply. The upstream release history below is retained for reference.
+
 This plugin will help you update the files associated with the known security fixes as listed below.
 It will overwrite the files and then auto uninstalls itself again.
 
